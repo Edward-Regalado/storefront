@@ -6,7 +6,7 @@ import { makeStyles } from '@mui/material/styles';
 function Footer() {
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{padding: '20px'}}>
       <Toolbar sx={{ display: 'flex', flexDirection: 'column'}}>
         <Typography variant="h5" >
           &copy; 2022 Tony Regalado
