@@ -1,4 +1,19 @@
-# Lab - Application State with Redux
+# Storefront
+
+- Creating a virtual storefront that allows users to browse product offerings by category, place items in their shopping cart, and check-out when they are ready to make their purchase.
+
+## Technical Requirements
+
+1. React
+2. ES6 Classes
+3. Redux Store for
+4. Deployed API with MongoDB storage for storing categories and products
+5. Superagent or Axios for performing API requests
+6. Material UI for layout and styling
+7. Test Driven Development using Jest
+8. Deployment to a cloud provider (Netlify, Amplify or Github Pages)
+
+## Lab - Application State with Redux
 
 ## Phase 1 Application Setup
 
@@ -23,3 +38,7 @@ And as developers, here are the high level development tasks that address the ab
 - When the user selects (clicks on) a category …
   - Identify that category as selected (change of class/display)
   - Show a list of products associated with the category
+
+## UML
+
+![Storefront](./src/assets/images/storefrontUML.PNG)
