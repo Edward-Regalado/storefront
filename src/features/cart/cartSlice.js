@@ -1,8 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+// let cartItems = [];
+
 const initialState = {
     count: 0,
-    itemsInCart: []
+    cartItems: [],
+    cartTotal: 0
 };
 
 export const cartSlice = createSlice({
@@ -10,16 +13,17 @@ export const cartSlice = createSlice({
     initialState,
     reducers: {
         addToCart(state, action) {
-            state.itemsInCart.push(action.payload);
+            state.cartItems.push(action.payload);
             state.count += 1;
-            console.log('action payload: ', action.payload);
-            console.log('action: ', action.payload);
-            console.log('itemsInCart: ', state.itemsInCart);
-            console.log('count: ', state.count);
+            state.cartTotal += action.payload.price;
+            // console.log('action payload: ', action.payload);
+            // console.log('cart total: ', state.cartTotal);
+            // console.log('action: ', action.payload);
+            // console.log('itemsInCart: ', state.cartItems);
+            // console.log('count: ', state.count);
         },
     }
 });
-
 
 export const { addToCart } = cartSlice.actions;
 

@@ -27,28 +27,36 @@ const styles = {
 };
 
 function ProductList(){
-      const products = useSelector(state => state.products.allProducts); // []
+      const products = useSelector(state => state.products.allProducts); // get all products from products array
+      const itemsInCart = useSelector(state => state.cart.cartItems); // get items from cart
       const dispatch = useDispatch();
-      const [item, setItem] = useState();
 
-      function handleAddToCart(e){
-        dispatch(cartSlice.actions.addToCart(e.target.value));
-        console.log('value----->: ', e.target.value);
+      console.log('ITEMS IN CART: ', itemsInCart);
+
+      function handleAddToCart(item){
+        dispatch(cartSlice.actions.addToCart(item));
+        // console.log('item sent to payload----->: ', item);
       }
-
-      console.log('products in productList: ', products);
       let renderedProducts = [];
       if(products.length > 0){
-        renderedProducts = products.map(item => (
-            <Card key={item.id} sx={styles.card}>
+        renderedProducts = products.map((item, idx) => (
+            <Card key={idx} sx={styles.card}>
               <CardMedia image={item.image} sx={{ height: '150px'}}/>
               <CardContent sx={styles.cardAction}>
-                <Typography>
+                <Box sx={{display: 'flex', flexDirection: 'column'}}>
+                <Typography align='center'>
                   {item.name}
                 </Typography>
+                <Typography align='center'>
+                  Price: ${item.price}
+                </Typography>
+                <Typography align='center'>
+                  Quantity: {item.inventory}
+                </Typography>
+                </Box>
               </CardContent>
               <CardActions sx={styles.cardAction}>
-                <Button value={item} onClick={(e) => handleAddToCart(e)} size='small' variant='contained' color='primary'>Add to Cart</Button>
+                <Button value={item} onClick={() => handleAddToCart(item)} size='small' variant='contained' color='primary'>Add to Cart</Button>
                 <Button size='small' variant='outlined' color='primary'>View Details</Button>
               </CardActions>
             </Card>
