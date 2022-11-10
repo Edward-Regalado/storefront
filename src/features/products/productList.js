@@ -9,15 +9,19 @@ const styles = {
     display: 'flex', 
     alignItems: 'center', 
     justifyContent: 'space-around', 
-    margin: '30px'
+    margin: '30px',
+    flexWrap: 'wrap',
+    // minWidth: '200px'
   },
   card: {
     boxShadow: '10px 10px 30px rgba(0, 0, 0, 0.1)',
     width: '20%',
     padding: '10px',
+    margin: '15px 0px',
     background: 'white',
     border: '1px solid #d4d1d1',
     borderRadius: '10px',
+    minWidth: '200px'
   },
   cardAction: {
     display: 'flex', 
