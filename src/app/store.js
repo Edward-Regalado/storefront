@@ -2,13 +2,36 @@ import { configureStore } from '@reduxjs/toolkit';
 // import counterReducer from '../features/counter/counterSlice';
 import productReducer from '../features/products/productSlice';
 import cartReducer from '../features/cart/cartSlice';
+import storage from 'redux-persist/lib/storage';
+import { persistReducer, persistStore } from 'redux-persist';
+import { combineReducers } from '@reduxjs/toolkit';
 
-const store = configureStore({
-  reducer: {
-    // the 'products' key is what we use to access state throughout the app.. state.product.category or state.product.filteredProducts.
-    products: productReducer,
-    cart: cartReducer 
-  },
+const rootPersistConfig = {
+  key: 'root',
+  storage,
+}
+
+const rootReducer = combineReducers({
+  cart : cartReducer,
+  products: productReducer,
 });
 
-export default store;
+// const persistCartConfig = {
+//   key: 'cart',
+//   storage,
+// }
+// const persistProductConfig = {
+//   key: 'product',
+//   storage,
+// }
+
+// const persistedProductReducer = persistReducer(persistProductConfig, productReducer);
+// const persistedCartReducer = persistReducer(persistCartConfig, cartReducer);
+
+const persistedRootReducer = persistReducer(rootPersistConfig, rootReducer);
+
+export const store = configureStore({
+    reducer: persistedRootReducer,
+});
+
+export const persistor = persistStore(store);
