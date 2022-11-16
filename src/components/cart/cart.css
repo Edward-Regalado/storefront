@@ -34,12 +34,14 @@
     bottom: 55px;
     visibility: hidden;
     max-height: 400px;
+    /* margin: 20px; */
 }
 
 .action.active .parent-item-div {
     overflow-y: scroll;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none;
+    /* margin: 20px; */
 }
 .action.active .parent-item-div::-webkit-scrollbar {
     width: 0;
@@ -54,6 +56,7 @@
     /* max-height: 500px; */
     /* overflow: scroll; */
     padding-bottom: 20px;
+    /* border: 2px solid black; */
 }
 
 .action .link {
@@ -64,6 +67,7 @@
     /* padding: 10px 0; */
     transition: 0.3s;
     width: 200px;
+    /* margin: 20px; */
     /* font-size: 0.2em; */
     /* overflow-y: scroll; */
 }
@@ -83,7 +87,7 @@
 
 .link {
     text-decoration: none;
-    background-color: antiquewhite;
+    background-color: #FFF;
     width: 50px;
     /* height: 200px; */
     /* font-size: 0.2rem; */

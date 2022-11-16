@@ -34,15 +34,18 @@ const styles = {
 
 function ProductList(){
       const products = useSelector(state => state.products.allProducts); // get all products from products array
+      const item = useSelector(state => state.products.updatedInventory);
       // const details = useSelector(state => state.products.productDetails); // get all products from products array
       // const itemsInCart = useSelector(state => state.cart.cartItems); // get items from cart
       const dispatch = useDispatch();
 
       // console.log('ITEMS IN CART: ', itemsInCart);
       // console.log('products: ', products);
+      console.log('updated inventory: ', item);
 
       function handleAddToCart(item){
         dispatch(cartSlice.actions.addToCart(item));
+        dispatch(productSlice.actions.updateInventory(item));
         // console.log('item sent to payload----->: ', item);
       }
 

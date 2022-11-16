@@ -8,6 +8,7 @@ const initialState = {
     allProducts,
     currentProduct: '',
     productDetails: null,
+    updatedInventory: null,
 }
 
 // think of the "slices" and little pieces of state management logic
@@ -24,6 +25,11 @@ export const productSlice = createSlice({
         productDetails(state, action){
             console.log('item details action payload', action.payload);
             state.productDetails = action.payload;
+        }, 
+        updateInventory(state, action){
+            let item = state.allProducts.find(x => x.id === action.payload.id);
+            item.inventory -= 1;
+            state.allProducts.map(x => x.id === action.payload.id ? x : item);
         }
     }
 });
