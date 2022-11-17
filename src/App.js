@@ -7,21 +7,25 @@ import Checkout from './components/cart/Checkout';
 import Details from './components/products/details'
 import Header from '../src/components/header';
 import Footer from '../src/components/footer';
-import store from './app/store';
+import { store, persistor } from './app/store';
+import { PersistGate } from 'redux-persist/integration/react';
+import './app.css';
 
 function App() {
   return (
     <Router>
       <Provider store={store}>
-        <Header />
-        <Routes>
-          <>
-            <Route path='/' element={<Storefront />} />
-            <Route path='/details' element={<Details />} />
-            <Route path='/checkout' element={<Checkout />} />
-          </>
-        </Routes>
-        <Footer />
+        <PersistGate loading={null} persistor={persistor}>
+          <Header />
+          <Routes>
+            <>
+              <Route path='/' element={<Storefront />} />
+              <Route path='/details/:id' element={<Details />} />
+              <Route path='/checkout' element={<Checkout />} />
+            </>
+          </Routes>
+          <Footer />
+        </PersistGate>
       </Provider>
     </Router>
   );

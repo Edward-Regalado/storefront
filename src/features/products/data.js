@@ -2,7 +2,7 @@ import tech from '../../assets/images/tech.jpg';
 import clothes from '../../assets/images/clothing.jpg';
 import food from '../../assets/images/food.jpg';
 
-export const data = [
+export let data = [
     {
       id: 0,
       name: "Gaming Monitor",
@@ -27,7 +27,7 @@ export const data = [
       description: "The best food truck in Seattle",
       category: "food",
       price: 20,
-      inventory: 50,
+      inventory: 1,
       image: food,
     },
 ];

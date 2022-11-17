@@ -11,14 +11,14 @@ const styles = {
     justifyContent: 'center', 
     marginTop: '20px', 
     marginBottom: '20px',
-    // border: '2px solid black'
+    // border: '2px solid red'
   },
   wrapper: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    // border: '2px solid black',
+    // border: '2px solid green',
   },
 }
 
@@ -37,7 +37,18 @@ function Categories() {
     <Box sx={styles.box}>
       <Box sx={styles.wrapper}>
         <Typography variant='h6'>Browse our Categories</Typography>
-         <Tabs value={activeTab} onChange={handleSelection}>
+         <Tabs 
+          textColor='inherit' 
+          TabIndicatorProps={{style: {backgroundColor: '#76e461'}}} 
+          sx={{
+            // '& button' : {color: 'red'} 
+            // '& button:active': {color: 'red'}, 
+            // '& button:hover' : {color: 'red'}
+            // '& button:focus' : {color: 'red'}
+          }} 
+          value={activeTab} 
+          onChange={handleSelection}
+          >
            {categoryTabs.map((info, index) => (        
              <Tab key={index} label={info.title} value={info.value}/>
              ))} 

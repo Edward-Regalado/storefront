@@ -9,6 +9,7 @@ function Header() {
 
   const theme = useContext(ThemeContext);
   const cartCount = useSelector(state => state.cart.count);
+  console.log('cart Count', cartCount);
 
   return (
     <>
@@ -21,7 +22,15 @@ function Header() {
           </Link>
           <Link to='/checkout' style={{textDecoration: 'none'}}>
             <Box>
-              <Button variant='contained' sx={{background: 'white', color: 'black'}}><ShoppingCartIcon /> Cart ({cartCount})</Button>
+              <Button 
+                variant='contained' 
+                sx={{
+                  background: 'white', 
+                  color: 'black',
+                  '&:hover': {backgroundColor: '#76e461'}
+                  }}>
+                  <ShoppingCartIcon /> Cart ({cartCount})
+              </Button>
             </Box>
           </Link>
         </Toolbar>

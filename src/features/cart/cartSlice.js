@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-// let cartItems = [];
+// import Chance from 'chance';
+// const chance = new Chance();
 
 const initialState = {
     count: 0,
+    total: 0,
     cartItems: [],
-    cartTotal: 0
 };
 
 export const cartSlice = createSlice({
@@ -13,15 +13,20 @@ export const cartSlice = createSlice({
     initialState,
     reducers: {
         addToCart(state, action) {
+            // let item = action.payload;
+            // let newId = chance.bb_pin();
+            // item.id = newId;
+            // state.cartItems.push(item);
             state.cartItems.push(action.payload);
-            state.count += 1;
-            state.cartTotal += action.payload.price;
-            // console.log('action payload: ', action.payload);
-            // console.log('cart total: ', state.cartTotal);
-            // console.log('action: ', action.payload);
-            // console.log('itemsInCart: ', state.cartItems);
-            // console.log('count: ', state.count);
+            state.count = state.cartItems.length;
+            state.total += action.payload.price;
         },
+        deleteFromCart(state, action) {
+            let itemToBeDeleted = action.payload.id;
+            state.cartTotal -= action.payload.price;
+            state.cartItems = state.cartItems.filter(item => item.id !== itemToBeDeleted);
+            state.count = state.cartItems.length;
+        }
     }
 });
 
