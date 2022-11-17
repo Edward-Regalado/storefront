@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import React from 'react'
-import { Typography, Box, Button } from '@mui/material';
+import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 // import { Container, Button, Link } from 'react-floating-action-button';
 import { productSlice } from '../../features/products/productSlice';
@@ -27,7 +27,7 @@ function SimpleCart() {
 
     function handleDelete(item){
         dispatch(cartSlice.actions.deleteFromCart(item));
-        // console.log('item deleted from simple cart', item);
+        dispatch(productSlice.actions.incrementInventory(item));
     }
 
     return (

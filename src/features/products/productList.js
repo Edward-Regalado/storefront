@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { cartSlice } from '../cart/cartSlice';
 import { productSlice } from '../products/productSlice';
-import { Container, Box, Typography, Button, Card, CardActions, CardContent, CardMedia, CssBaseline, Grid, Toolbar } from '@mui/material';
+import { Box, Typography, Button, Card, CardActions, CardContent, CardMedia } from '@mui/material';
 
 const styles = {
   box: {
@@ -33,20 +33,24 @@ const styles = {
 };
 
 function ProductList(){
-      const products = useSelector(state => state.products.allProducts); // get all products from products array
-      const item = useSelector(state => state.products.updatedInventory);
+      const products = useSelector(state => state.products.productSelected); // get all products from products array
+      // const item = useSelector(state => state.products.decrementInventory);
       // const details = useSelector(state => state.products.productDetails); // get all products from products array
       // const itemsInCart = useSelector(state => state.cart.cartItems); // get items from cart
       const dispatch = useDispatch();
 
       // console.log('ITEMS IN CART: ', itemsInCart);
       // console.log('products: ', products);
-      console.log('updated inventory: ', item);
+      // console.log('updated inventory: ', item);
 
       function handleAddToCart(item){
-        dispatch(cartSlice.actions.addToCart(item));
-        dispatch(productSlice.actions.updateInventory(item));
-        // console.log('item sent to payload----->: ', item);
+        if(item.inventory === 0){
+          // console.log('Item out of Stock');
+          dispatch(productSlice.actions.outOfStock(item));
+        } else {
+          dispatch(cartSlice.actions.addToCart(item));
+          dispatch(productSlice.actions.decrementInventory(item));
+        }
       }
 
       function handleProductDetails(item){
@@ -67,9 +71,11 @@ function ProductList(){
                 <Typography align='center'>
                   Price: ${item.price}
                 </Typography>
+                {item.inventory >= 1 ? 
                 <Typography align='center'>
                   Quantity: {item.inventory}
                 </Typography>
+              : <Typography align='center'> Quantity: Out Of Stock</Typography>}
                 </Box>
               </CardContent>
               <CardActions sx={styles.cardAction}>

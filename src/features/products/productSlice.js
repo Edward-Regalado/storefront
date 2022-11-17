@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { data as allProducts } from './data';
 
+// let arr = []
+
 // initial state is used to set the default state properties until one of our reducer methods is called
 const initialState = {
     currentCategory: 'all',
@@ -8,7 +10,8 @@ const initialState = {
     allProducts,
     currentProduct: '',
     productDetails: null,
-    updatedInventory: null,
+    // categoryList,
+    productSelected: allProducts,
 }
 
 // think of the "slices" and little pieces of state management logic
@@ -20,20 +23,31 @@ export const productSlice = createSlice({
             // console.log('action.payload', action.payload);
             state.category = action.payload;
             state.currentCategory = action.payload;
-            state.allProducts = state.category === 'all' ? allProducts : allProducts.filter((item) => item.category === state.category);
+            state.productSelected = state.category === 'all' ? state.allProducts : state.allProducts.filter((item) => item.category === state.category);
         },
         productDetails(state, action){
             console.log('item details action payload', action.payload);
             state.productDetails = action.payload;
         }, 
-        updateInventory(state, action){
+        decrementInventory(state, action){
             let item = state.allProducts.find(x => x.id === action.payload.id);
-            item.inventory -= 1;
-            state.allProducts.map(x => x.id === action.payload.id ? x : item);
+            item.inventory--;
+            state.productSelected = state.category === 'all' ? state.allProducts : state.allProducts.filter((item) => item.category === state.category);
+        },
+        incrementInventory(state, action){
+            let item = state.allProducts.find(x => x.id === action.payload.id);
+            item.inventory++;
+            state.productSelected = state.category === 'all' ? state.allProducts : state.allProducts.filter((item) => item.category === state.category);
+        },
+        outOfStock(state, action){
+            let item = state.allProducts.find(x => x.id === action.payload.id);
+            console.log(`${item.name} is out of stock!`);
+            // item.inventory = 'out of stock';
+            // state.productSelected = state.category === 'all' ? state.allProducts : state.allProducts.filter((item) => item.category === state.category);
         }
     }
 });
 
-export const { selectCategory } = productSlice.actions;
+export const { selectCategory, decrementInventory, incrementInventory, productDetails } = productSlice.actions;
 
 export default productSlice.reducer;

@@ -38,7 +38,7 @@ function Categories() {
       <Box sx={styles.wrapper}>
         <Typography variant='h6'>Browse our Categories</Typography>
          <Tabs 
-          textColor='text.disabled' 
+          textColor='inherit' 
           TabIndicatorProps={{style: {backgroundColor: '#76e461'}}} 
           sx={{
             // '& button' : {color: 'red'} 

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-// let cartItems = [];
+// import Chance from 'chance';
+// const chance = new Chance();
 
 const initialState = {
     count: 0,
@@ -13,6 +13,10 @@ export const cartSlice = createSlice({
     initialState,
     reducers: {
         addToCart(state, action) {
+            // let item = action.payload;
+            // let newId = chance.bb_pin();
+            // item.id = newId;
+            // state.cartItems.push(item);
             state.cartItems.push(action.payload);
             state.count = state.cartItems.length;
             state.total += action.payload.price;

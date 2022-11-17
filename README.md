@@ -2,6 +2,12 @@
 
 - Creating a virtual storefront that allows users to browse product offerings by category, place items in their shopping cart, and check-out when they are ready to make their purchase.
 
+## Setup
+
+- `.evn` requirements (n/a)
+- `npm i` - installs all require dependencies
+- `npm start` - starts the application on localhost:3000
+
 ## Technical Requirements
 
 1. React
@@ -42,3 +48,33 @@ And as developers, here are the high level development tasks that address the ab
 ## UML
 
 ![Storefront](./src/assets/images/storefrontUML.PNG)
+
+## Lab: Redux - Combined Reducers
+
+## Phase 2: Shopping Cart
+
+- Add items to a shopping cart
+- Update quantities
+- Remove items from the cart
+- Show the cart in real-time on the UI
+
+The user stories from Phase 1 remain unchanged. For this phase, we are now adding the following new user stories to meet the new requirements.
+
+- As a user, I want to choose from products in the list and add them to my shopping cart
+- As a user, I want to see the products that I’ve added to my shopping cart so that
+- As a user, I want to change the quantity of items I intend to purchase in my shopping cart
+- As a user, I want to be able to remove an item from my shopping cart
+
+### Application Flow:
+
+User sees a list of categories
+… Chooses a category and sees a list of products
+… Clicks the “Add to Cart” button on any product
+… Clicks the “Cart” link in the header
+… Sees a list of all products in the cart
+… Clicks the delete button on an item and sees the item removed
+… Changes the quantity selector on an item and sees the cart total change
+
+### Collaboration & Credit
+
+- Danny Castro
