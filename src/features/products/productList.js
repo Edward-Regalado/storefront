@@ -33,19 +33,13 @@ const styles = {
 };
 
 function ProductList(){
-      const products = useSelector(state => state.products.productSelected); // get all products from products array
-      // const item = useSelector(state => state.products.decrementInventory);
-      // const details = useSelector(state => state.products.productDetails); // get all products from products array
-      // const itemsInCart = useSelector(state => state.cart.cartItems); // get items from cart
       const dispatch = useDispatch();
-
-      // console.log('ITEMS IN CART: ', itemsInCart);
-      // console.log('products: ', products);
-      // console.log('updated inventory: ', item);
+      const products = useSelector(state => state.products.productSelected);// get all products from products array
+      // const products = useSelector(state => state.products.allProducts);// get all products from products array
+      console.log('products: ', products);
 
       function handleAddToCart(item){
         if(item.inventory === 0){
-          // console.log('Item out of Stock');
           dispatch(productSlice.actions.outOfStock(item));
         } else {
           dispatch(cartSlice.actions.addToCart(item));

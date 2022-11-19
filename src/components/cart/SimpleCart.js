@@ -2,7 +2,6 @@ import { useSelector } from 'react-redux';
 import React from 'react'
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
-// import { Container, Button, Link } from 'react-floating-action-button';
 import { productSlice } from '../../features/products/productSlice';
 import { cartSlice } from '../../features/cart/cartSlice';
 import { useDispatch } from 'react-redux';

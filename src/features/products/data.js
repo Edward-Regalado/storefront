@@ -45,13 +45,18 @@ export const categoryTabs = [
   },
   {
       id: 2,
-      title: 'Clothing',
-      value: 'clothing',        
+      title: 'Apperal',
+      value: 'apperal',        
   },
   {
       id: 3,
-      title: 'Food',
-      value: 'food',        
+      title: 'Games',
+      value: 'games',        
+  },
+  {
+      id: 4,
+      title: 'Weapons',
+      value: 'weapons',        
   },
 ]
 
