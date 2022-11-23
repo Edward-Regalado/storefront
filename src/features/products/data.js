@@ -46,12 +46,12 @@ export const categoryTabs = [
   {
       id: 2,
       title: 'Clothing',
-      value: 'clothing',        
+      value: 'clothing',         
   },
   {
       id: 3,
-      title: 'Food',
-      value: 'food',        
+      title: 'Outdoors',
+      value: 'outdoors',        
   },
 ]
 

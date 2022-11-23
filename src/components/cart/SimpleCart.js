@@ -2,7 +2,6 @@ import { useSelector } from 'react-redux';
 import React from 'react'
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
-// import { Container, Button, Link } from 'react-floating-action-button';
 import { productSlice } from '../../features/products/productSlice';
 import { cartSlice } from '../../features/cart/cartSlice';
 import { useDispatch } from 'react-redux';
@@ -14,10 +13,11 @@ import './cart.css';
 function SimpleCart() {
     const itemsInCart = useSelector(state => state.cart.cartItems);
     const dispatch = useDispatch();
+    console.log('items in cart: ', itemsInCart);
 
     function handleProductDetails(item){
         // console.log('item details button clicked: ', item);
-        dispatch(productSlice.actions.productDetails(item));
+        dispatch(productSlice.actions.productDetails(item)); // dispatch sends payload to the reducers
     }
 
     function actionToggle(){
@@ -26,7 +26,9 @@ function SimpleCart() {
     }
 
     function handleDelete(item){
+        console.log('delete item in cart: ', item);
         dispatch(cartSlice.actions.deleteFromCart(item));
+        dispatch(cartSlice.actions.decrementTotal(item));
         dispatch(productSlice.actions.incrementInventory(item));
     }
 

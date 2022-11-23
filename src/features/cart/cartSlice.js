@@ -13,19 +13,21 @@ export const cartSlice = createSlice({
     initialState,
     reducers: {
         addToCart(state, action) {
-            // let item = action.payload;
-            // let newId = chance.bb_pin();
-            // item.id = newId;
-            // state.cartItems.push(item);
             state.cartItems.push(action.payload);
             state.count = state.cartItems.length;
-            state.total += action.payload.price;
         },
         deleteFromCart(state, action) {
-            let itemToBeDeleted = action.payload.id;
-            state.cartTotal -= action.payload.price;
-            state.cartItems = state.cartItems.filter(item => item.id !== itemToBeDeleted);
+            let itemToBeDeleted = action.payload._id;
+            state.cartItems = state.cartItems.filter(item => item._id !== itemToBeDeleted);
             state.count = state.cartItems.length;
+        },
+        decrementTotal(state, action){
+            let price = action.payload.price;
+            state.total -= price;
+        },
+        incrementTotal(state, action){
+            let price = action.payload.price;
+            state.total += price;
         }
     }
 });

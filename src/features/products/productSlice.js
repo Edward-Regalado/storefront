@@ -1,24 +1,47 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { data as allProducts } from './data';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+// import { data as allProducts } from './data';
 
-// let arr = []
+// const url = 'http://localhost:3001'
+const url = process.env.REACT_APP_HEROKU_URL;
 
-// initial state is used to set the default state properties until one of our reducer methods is called
 const initialState = {
     currentCategory: 'all',
     category: '',
-    allProducts,
+    allProducts: [],
     currentProduct: '',
     productDetails: null,
-    // categoryList,
-    productSelected: allProducts,
+    productSelected: [],
+    isLoading: true,
+    relatedItems: [],
 }
+
+
+export const getProducts = createAsyncThunk(
+    'products/getProducts', 
+    async (thunkAPI) => {
+    try {
+        const res = await axios.get(url)
+        let arr = [];
+        for(const item of res.data){
+            arr.push(item);
+        }
+        return arr;
+    } catch (e) {
+        console.log('error: ', e.message);
+    }
+})
+
 
 // think of the "slices" and little pieces of state management logic
 export const productSlice = createSlice({
     name: 'product',
     initialState,
     reducers: {
+        // setProducts(state, action){
+        //     // action.payload will be the res.data object from my axios call
+        //     // state.productsArray = action.payload; 
+        // },
         selectCategory(state, action) {
             // console.log('action.payload', action.payload);
             state.category = action.payload;
@@ -27,25 +50,41 @@ export const productSlice = createSlice({
         },
         productDetails(state, action){
             console.log('item details action payload', action.payload);
+            let category = action.payload.category;
+            let rand = state.allProducts.filter((item) => item.category === category);
+            state.relatedItems = rand.sort(() => Math.random() - Math.random()).slice(0, 3);
+            console.log('related items array: ', state.relatedItems);
             state.productDetails = action.payload;
         }, 
         decrementInventory(state, action){
-            let item = state.allProducts.find(x => x.id === action.payload.id);
+            let item = state.allProducts.find(x => x._id === action.payload._id);
             item.inventory--;
             state.productSelected = state.category === 'all' ? state.allProducts : state.allProducts.filter((item) => item.category === state.category);
         },
         incrementInventory(state, action){
-            let item = state.allProducts.find(x => x.id === action.payload.id);
+            let item = state.allProducts.find(x => x._id === action.payload.id);
             item.inventory++;
             state.productSelected = state.category === 'all' ? state.allProducts : state.allProducts.filter((item) => item.category === state.category);
         },
         outOfStock(state, action){
-            let item = state.allProducts.find(x => x.id === action.payload.id);
+            let item = state.allProducts.find(x => x._id === action.payload._id);
             console.log(`${item.name} is out of stock!`);
-            // item.inventory = 'out of stock';
-            // state.productSelected = state.category === 'all' ? state.allProducts : state.allProducts.filter((item) => item.category === state.category);
         }
-    }
+    }, 
+    extraReducers: (builder) => {
+        builder.addCase(getProducts.pending, (state) => {
+            state.isLoading = true;
+        })
+        builder.addCase(getProducts.fulfilled, (state, action) => {
+            console.log('action in extra reducers: ', action);
+            state.isLoading = false;
+            state.productSelected = action.payload;
+            state.allProducts = action.payload;
+        })
+        builder.addCase(getProducts.rejected, (state) => {
+            state.isLoading = false;
+        })
+    },
 });
 
 export const { selectCategory, decrementInventory, incrementInventory, productDetails } = productSlice.actions;
