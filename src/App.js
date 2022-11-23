@@ -8,6 +8,7 @@ import Header from '../src/components/header';
 import Footer from '../src/components/footer';
 import { getProducts } from '../src/features/products/productSlice';
 import { useSelector, useDispatch } from 'react-redux';
+import { Container } from '@mui/material';
 import './app.css';
 
 function App() {
@@ -24,9 +25,9 @@ function App() {
 
   if(isLoading){
     return (
-      <div>
-        <h1>Hello world</h1>
-      </div>
+      <Container style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+        <h1>Loading... </h1>
+      </Container>
     );
   }
   return (
@@ -35,8 +36,9 @@ function App() {
       <Routes>
         <>
           <Route path='/' element={<Storefront />} />
-          <Route path='/details/:id' element={<Details />} />
-          <Route path='/checkout' element={<Checkout />} />
+          <Route exact path='/details/:id' element={<Details />} />
+          {/* <Route exact path='/details/details/:id' element={<Details />} /> */}
+          <Route exact path='/checkout' element={<Checkout />} />
         </>
       </Routes>
       <Footer />

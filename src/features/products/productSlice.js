@@ -12,7 +12,7 @@ const initialState = {
     productDetails: null,
     productSelected: [],
     isLoading: true,
-    // items: [],
+    relatedItems: [],
 }
 
 
@@ -54,20 +54,24 @@ export const productSlice = createSlice({
         },
         productDetails(state, action){
             console.log('item details action payload', action.payload);
+            let category = action.payload.category;
+            let rand = state.allProducts.filter((item) => item.category === category);
+            state.relatedItems = rand.sort(() => Math.random() - Math.random()).slice(0, 3);
+            console.log('related items array: ', state.relatedItems);
             state.productDetails = action.payload;
         }, 
         decrementInventory(state, action){
-            let item = state.allProducts.find(x => x.id === action.payload.id);
+            let item = state.allProducts.find(x => x._id === action.payload._id);
             item.inventory--;
             state.productSelected = state.category === 'all' ? state.allProducts : state.allProducts.filter((item) => item.category === state.category);
         },
         incrementInventory(state, action){
-            let item = state.allProducts.find(x => x.id === action.payload.id);
+            let item = state.allProducts.find(x => x._id === action.payload.id);
             item.inventory++;
             state.productSelected = state.category === 'all' ? state.allProducts : state.allProducts.filter((item) => item.category === state.category);
         },
         outOfStock(state, action){
-            let item = state.allProducts.find(x => x.id === action.payload.id);
+            let item = state.allProducts.find(x => x._id === action.payload._id);
             console.log(`${item.name} is out of stock!`);
         }
     }, 
