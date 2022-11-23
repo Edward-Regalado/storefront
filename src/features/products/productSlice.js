@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { useEffect } from 'react'
 // import { data as allProducts } from './data';
-const url = 'http://localhost:3001'
+
+// const url = 'http://localhost:3001'
+const url = process.env.REACT_APP_HEROKU_URL;
 
 const initialState = {
     currentCategory: 'all',
@@ -20,15 +21,10 @@ export const getProducts = createAsyncThunk(
     'products/getProducts', 
     async (thunkAPI) => {
     try {
-        // console.log('data: ', data);
-        // console.log('thunkAPI: ', thunkAPI);
-        // console.log('thunkAPI: ', thunkAPI.getState());
         const res = await axios.get(url)
         let arr = [];
         for(const item of res.data){
             arr.push(item);
-            // state.allProducts.push(item);
-            // items.push(item);
         }
         return arr;
     } catch (e) {

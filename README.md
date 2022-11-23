@@ -75,7 +75,6 @@ User sees a list of categories
 … Clicks the delete button on an item and sees the item removed
 … Changes the quantity selector on an item and sees the cart total change
 
-
 ## Phase 3: Live Data
 
 - Connect the application to a live API
@@ -85,6 +84,18 @@ The user stories from Phases 1 and 2 remain unchanged. For this phase, we are no
 
 As a user, I want to interact with live inventory so that I have confidence that the displayed products are in stock
 As a user, I want to know to that when I add an item to my cart, that it is removed from inventory so that no other users can purchase it
+
+## Storefront API deployed on Heroku
+
+- DATABASE URL (Live API): https://storefront.herokuapp.com/
+
+![Live API](./src/assets/images/liveAPI.PNG)
+
+## Setup/Run with API
+
+- add `.evn` file at source level:
+  - REACT_APP_HEROKU_URL='https://storefront.herokuapp.com/'
+- npm start
 
 ### Collaboration & Credit
 
