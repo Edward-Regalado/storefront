@@ -97,6 +97,32 @@ As a user, I want to know to that when I add an item to my cart, that it is remo
   - REACT_APP_HEROKU_URL='https://storefront.herokuapp.com/'
 - npm start
 
+## Phase 4: Checkout & Details Pages
+
+- Refactor the store to sue the latest Redux design patterns (Redux Toolkit)
+- Add a cart checkout page
+- Add a product details page
+
+### Details Page
+
+![Details Page](./src/assets/images/detailsPage.PNG)
+
+### Checkout Page
+
+![Checkout Page](./src/assets/images/checkoutPage.PNG)  
+
+### Checkout Items in cart
+
+![Checkout Page 2](./src/assets/images/checkoutPage2.PNG)  
+
+### Checkout Thank  you for your order!
+
+![Checkout Page 3](./src/assets/images/checkoutPage3.PNG)  
+
+### Products Page 
+
+![Products Page](./src/assets/images/productsPage.PNG)
+
 ### Collaboration & Credit
 
 - Danny Castro

@@ -5,18 +5,6 @@ import axios from 'axios';
 // const url = 'http://localhost:3001'
 const url = process.env.REACT_APP_HEROKU_URL;
 
-const initialState = {
-    currentCategory: 'all',
-    category: '',
-    allProducts: [],
-    currentProduct: '',
-    productDetails: null,
-    productSelected: [],
-    isLoading: true,
-    relatedItems: [],
-}
-
-
 export const getProducts = createAsyncThunk(
     'products/getProducts', 
     async (thunkAPI) => {
@@ -32,6 +20,16 @@ export const getProducts = createAsyncThunk(
     }
 })
 
+const initialState = {
+    currentCategory: 'all',
+    category: '',
+    allProducts: [],
+    currentProduct: '',
+    productDetails: null,
+    productSelected: [],
+    isLoading: true,
+    relatedItems: [],
+}
 
 // think of the "slices" and little pieces of state management logic
 export const productSlice = createSlice({
@@ -57,9 +55,21 @@ export const productSlice = createSlice({
             state.productDetails = action.payload;
         }, 
         decrementInventory(state, action){
-            let item = state.allProducts.find(x => x._id === action.payload._id);
-            item.inventory--;
-            state.productSelected = state.category === 'all' ? state.allProducts : state.allProducts.filter((item) => item.category === state.category);
+            // console.log('all products: ', getState());
+            let index = state.allProducts.indexOf(object => {
+                return object._id === action.payload._id;
+            })
+            // console.log('index: ', index);
+            // console.log('action payload: ', action.payload);
+            // console.log('action payload id: ', action.payload._id);
+            // let newObject = state.allProducts.find(x => x.id === action.payload._id);
+            // newObject.inventory--;
+
+            state.productSelected[index].inventory--;
+            // let item = state.allProducts.find(x => x._id === action.payload._id);
+            
+            // state.productSelecteditem.inventory--;
+            state.productSelected = state.currentCategory === 'all' ? state.allProducts : state.allProducts.filter((item) => item.category === state.category);
         },
         incrementInventory(state, action){
             let item = state.allProducts.find(x => x._id === action.payload.id);
@@ -76,7 +86,7 @@ export const productSlice = createSlice({
             state.isLoading = true;
         })
         builder.addCase(getProducts.fulfilled, (state, action) => {
-            console.log('action in extra reducers: ', action);
+            // console.log('action in extra reducers: ', action);
             state.isLoading = false;
             state.productSelected = action.payload;
             state.allProducts = action.payload;

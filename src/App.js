@@ -18,7 +18,7 @@ function App() {
 
   // call the getProducts function from here- we can pass data such as product ID, name, etc..
   useEffect(() => {
-  console.log('useEffect called');
+  // console.log('useEffect called');
   // getProducts();
   dispatch(getProducts());
   }, [dispatch]);
