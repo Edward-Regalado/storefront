@@ -28,6 +28,11 @@ export const cartSlice = createSlice({
         incrementTotal(state, action){
             let price = action.payload.price;
             state.total += price;
+        },
+        clearCart(state, action){
+            state.total = 0;
+            state.count = 0;
+            state.cartItems = [];
         }
     }
 });

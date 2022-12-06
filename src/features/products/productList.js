@@ -35,8 +35,9 @@ const styles = {
 function ProductList(){
       const dispatch = useDispatch();
       const products = useSelector(state => state.products.productSelected);
+      // const products = [1, 2]
       // const products = useSelector(state => state.products.allProducts);// get all products from products array
-      console.log('products: ', products);
+      // console.log('products: ', products);
 
       function handleAddToCart(item){
         if(item.inventory === 0){
@@ -49,7 +50,7 @@ function ProductList(){
       }
 
       function handleProductDetails(item){
-        console.log('item details button clicked: ', item);
+        // console.log('item details button clicked: ', item);
         dispatch(productSlice.actions.productDetails(item));
       }
 

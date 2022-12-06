@@ -13,7 +13,7 @@ import './cart.css';
 function SimpleCart() {
     const itemsInCart = useSelector(state => state.cart.cartItems);
     const dispatch = useDispatch();
-    console.log('items in cart: ', itemsInCart);
+    // console.log('items in cart: ', itemsInCart);
 
     function handleProductDetails(item){
         // console.log('item details button clicked: ', item);
@@ -26,7 +26,7 @@ function SimpleCart() {
     }
 
     function handleDelete(item){
-        console.log('delete item in cart: ', item);
+        // console.log('delete item in cart: ', item);
         dispatch(cartSlice.actions.deleteFromCart(item));
         dispatch(cartSlice.actions.decrementTotal(item));
         dispatch(productSlice.actions.incrementInventory(item));

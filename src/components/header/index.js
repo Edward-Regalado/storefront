@@ -9,7 +9,7 @@ function Header() {
 
   const theme = useContext(ThemeContext);
   const cartCount = useSelector(state => state.cart.count);
-  console.log('cart Count', cartCount);
+  // console.log('cart Count', cartCount);
 
   return (
     <>
